@@ -9,5 +9,5 @@ package modelo;
  * @author ACER
  */
 public enum TipoToken {
-    
+    NUMERO_ENTERO, IDENTIFICADOR, PALABRA_RESERVADA, LITERAL, COMENTARIO, CARACTER_ESPECIAL
 }

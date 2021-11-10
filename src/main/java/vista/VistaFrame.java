@@ -4,17 +4,34 @@
  */
 package vista;
 
+import archivo.LectorDeArchivosEnTexto;
+import controlador.AnalisisLexico;
+import controlador.SeparacionTexto;
+import java.io.File;
+import java.io.IOException;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ACER
  */
 public class VistaFrame extends javax.swing.JFrame {
-
+    private LectorDeArchivosEnTexto lectorArchivo;
+    private SeparacionTexto separarTexto;
+    private AnalisisLexico analizarLexema;
     /**
      * Creates new form VistaFrame
      */
     public VistaFrame() {
         initComponents();
+        this.setVisible(true);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.lectorArchivo = new LectorDeArchivosEnTexto();
+        this.separarTexto = new SeparacionTexto();
+        this.analizarLexema = new AnalisisLexico();
+
     }
 
     /**
@@ -26,57 +43,152 @@ public class VistaFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        cargaButton = new javax.swing.JButton();
+        copyButton = new javax.swing.JButton();
+        analisisButton = new javax.swing.JButton();
+        pasteButton = new javax.swing.JButton();
+        guardarButton = new javax.swing.JButton();
+        undoButton = new javax.swing.JButton();
+        saveAsButton = new javax.swing.JButton();
+        doButton = new javax.swing.JButton();
+        nuevoButton = new javax.swing.JButton();
+        acercaDeButton = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        cargaButton.setText("ABRIR ARCHIVO");
+        cargaButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargaButtonActionPerformed(evt);
+            }
+        });
+
+        copyButton.setText("COPY");
+
+        analisisButton.setText("ANALIZAR");
+        analisisButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                analisisButtonActionPerformed(evt);
+            }
+        });
+
+        pasteButton.setText("PASTE");
+
+        guardarButton.setText("GUARDAR ARCHIVO");
+
+        undoButton.setText("UNDO");
+
+        saveAsButton.setText("GUARDAR COMO");
+
+        doButton.setText("DO");
+
+        nuevoButton.setText("NUEVO");
+
+        acercaDeButton.setText("ACERCA DE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(copyButton)
+                                .addGap(53, 53, 53)
+                                .addComponent(pasteButton)
+                                .addGap(48, 48, 48)
+                                .addComponent(undoButton)
+                                .addGap(34, 34, 34))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cargaButton)
+                                .addGap(32, 32, 32)
+                                .addComponent(analisisButton)
+                                .addGap(28, 28, 28)
+                                .addComponent(guardarButton)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(doButton)
+                                .addGap(48, 48, 48)
+                                .addComponent(acercaDeButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(saveAsButton)
+                                .addGap(37, 37, 37)
+                                .addComponent(nuevoButton)))))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(guardarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cargaButton)
+                        .addComponent(analisisButton)
+                        .addComponent(nuevoButton)
+                        .addComponent(saveAsButton)))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(copyButton)
+                    .addComponent(pasteButton)
+                    .addComponent(undoButton)
+                    .addComponent(doButton)
+                    .addComponent(acercaDeButton))
+                .addGap(40, 40, 40))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+    private void cargaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargaButtonActionPerformed
+        JFileChooser fileChosser = new JFileChooser();
+        int seleccion = fileChosser.showOpenDialog(this);
+        
+        if(seleccion == JFileChooser.APPROVE_OPTION){
+            File fichero = fileChosser.getSelectedFile();
+            try {
+                this.lectorArchivo.cargarDatos(fichero, this.jTextArea1);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error al leer el archivo");
+                ex.printStackTrace();
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VistaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VistaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VistaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VistaFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_cargaButtonActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VistaFrame().setVisible(true);
-            }
-        });
-    }
+    private void analisisButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analisisButtonActionPerformed
+        this.analizarLexema.analisis(this.separarTexto.crearLexema(this.jTextArea1));
+    }//GEN-LAST:event_analisisButtonActionPerformed
+
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton acercaDeButton;
+    private javax.swing.JButton analisisButton;
+    private javax.swing.JButton cargaButton;
+    private javax.swing.JButton copyButton;
+    private javax.swing.JButton doButton;
+    private javax.swing.JButton guardarButton;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JButton nuevoButton;
+    private javax.swing.JButton pasteButton;
+    private javax.swing.JButton saveAsButton;
+    private javax.swing.JButton undoButton;
     // End of variables declaration//GEN-END:variables
 }
